@@ -37,6 +37,12 @@ std::vector<double> DoubleStarSatelite::F(double time, std::vector<double> &coor
     return FY;
 }
 
+double DoubleStarSatelite::Step(int interval) {
+    NextStep(((double)interval) / 1000.0);
+    return t;
+}
+
 DoubleStarSatelite::~DoubleStarSatelite()
 {
+
 }

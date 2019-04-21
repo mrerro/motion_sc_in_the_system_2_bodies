@@ -20,6 +20,7 @@ public:
     ~DoubleStarSatelite();
     
     virtual std::vector<double> F(double t, std::vector<double> &Y);
+    double Step(int interval);
 
     double get_x() { return Y[0]; }
     double get_y() { return Y[1]; }
