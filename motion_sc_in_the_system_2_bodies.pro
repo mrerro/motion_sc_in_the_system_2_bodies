@@ -30,14 +30,12 @@ SOURCES += \
     DoubleStarSatelite.cpp \
         main.cpp \
         form.cpp \
-    RungeKutta.cpp \
-    Satelite.cpp
+    RungeKutta.cpp
 
 HEADERS += \
     DoubleStarSatelite.hpp \
         form.h \
-    RungeKutta.h \
-    Satelite.h
+    RungeKutta.h
 
 FORMS += \
         form.ui
