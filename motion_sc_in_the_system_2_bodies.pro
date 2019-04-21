@@ -27,12 +27,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    DoubleStarSatelite.cpp \
         main.cpp \
         form.cpp \
     RungeKutta.cpp \
     Satelite.cpp
 
 HEADERS += \
+    DoubleStarSatelite.hpp \
         form.h \
     RungeKutta.h \
     Satelite.h

@@ -1,11 +1,11 @@
-#include "RKMethod.hpp"
+#include "RungeKutta.h"
 #include <cmath>
 #include <vector>
 
 #ifndef DoubleStarSateliteCls
 #define DoubleStarSateliteCls
 
-class DoubleStarSatelite : public RKMethod
+class DoubleStarSatelite : public RungeKutta
 {
 private:
     const double G = 6.67e-11; // м3 с-3 кг-2 Гравитационная постоянная

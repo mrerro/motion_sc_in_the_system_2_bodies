@@ -1,6 +1,6 @@
 #include "DoubleStarSatelite.hpp"
 
-DoubleStarSatelite::DoubleStarSatelite(double M1, double M2, double m, double L, double x0, double y0, double Vx0, double Vy0) : RKMethod(4)
+DoubleStarSatelite::DoubleStarSatelite(double M1, double M2, double m, double L, double x0, double y0, double Vx0, double Vy0) : RungeKutta (4)
 {
     this->M1 = M1;
     this->M2 = M2;
