@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// Конструктор
 	/// </summary>
-    RungeKutta();
+	RungeKutta();
 
 	/// <summary>
 	/// Выделение памяти под рабочие массивы
