@@ -33,9 +33,13 @@ form::form(QWidget *parent) :
 	gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
     series->setBrush(gradient);*/
     series = new QLineSeries();
+    planet1 = new QScatterSeries();
+    planet2 = new QScatterSeries();
 
     chart = new QChart();
-	chart->addSeries(series);
+    chart->addSeries(series);
+    chart->addSeries(planet1);
+    chart->addSeries(planet2);
     chart->createDefaultAxes();
     auto xAxis = chart->axes(Qt::Horizontal);
     auto yAxis = chart->axes(Qt::Vertical);
@@ -45,6 +49,7 @@ form::form(QWidget *parent) :
     ui->graphicsView->setChart(chart);
     ui->start->setDisabled(false);
     ui->stop->setDisabled(true);
+    ui->L->valueChanged(ui->L->value());
 }
 
 void form::updateGraph(){
@@ -87,4 +92,16 @@ void form::on_stop_clicked()
         updateStatus();
         //TODO очистка расчетов
     }
+}
+
+void form::on_L_valueChanged(double L)
+{
+    planet1->clear();
+    planet2->clear();
+    double x1 = - L*ui->M2->value()/(ui->M1->value()+ui->M2->value());
+    double x2 = x1 + L;
+    planet1->append(x1,0);
+    planet2->append(x2,0);
+    ui->graphicsView->update();
+    //ui->status->setText(QString::number(x1)+" "+QString::number(x2));
 }

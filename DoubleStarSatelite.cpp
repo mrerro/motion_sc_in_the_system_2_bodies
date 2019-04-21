@@ -7,8 +7,8 @@ DoubleStarSatelite::DoubleStarSatelite(double M1, double M2, double m, double L,
     this->m = m;
 
     this->L = L;
-    this->x1 = L * M2 / (M1+M2);
-    this->x2 = L - x1;
+    this->x1 = - L * M2 / (M1+M2);
+    this->x2 = x1 + L;
 
     this->w = std::sqrt(G*(M1+M2)/std::pow(L, 3));
 
