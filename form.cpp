@@ -1,5 +1,6 @@
 #include "form.h"
 #include "ui_form.h"
+#include <cmath>
 
 using namespace QtCharts;
 
@@ -54,9 +55,8 @@ form::form(QWidget *parent) :
 }
 
 void form::updateGraph(){
-    totalTime = satelite->Step(timerInterval);
-    //totalTime = totalTime+timerInterval;
-    series->append(satelite->GetX(),satelite->GetY());
+    totalTime = doubleStarSatelite->Step(timerInterval);
+    series->append(doubleStarSatelite->get_x(),doubleStarSatelite->get_y());
     ui->graphicsView->update();
     updateStatus();
 }
@@ -74,9 +74,13 @@ form::~form()
 
 void form::on_start_clicked()
 {
-    satelite = new Satelite(59.7, 417.0, 100.0, 0.0, 64, 1.57);
+    if(!ui->stop->isEnabled()){
+    doubleStarSatelite = new DoubleStarSatelite(ui->M1->value(),ui->M2->value(),ui->m->value(),ui->L->value(),ui->R->value()*cos(ui->fi->value()),ui->R->value()*sin(ui->fi->value()),ui->V->value()*cos(ui->teta->value()),ui->V->value()*sin(ui->teta->value()));
+    }
+    setDisabledSplinBoxes(true);
     timer->start(); // Запускаем таймер
     ui->start->setDisabled(true);
+    ui->stop->setText("Пауза");
     ui->stop->setDisabled(false);
 }
 
@@ -85,9 +89,12 @@ void form::on_stop_clicked()
     if(timer->isActive()){
         timer->stop();
         ui->start->setDisabled(false);
+        ui->stop->setText("Стоп");
     }else{
         totalTime =0;
         ui->stop->setDisabled(true);
+        ui->stop->setText("Пауза");
+        setDisabledSplinBoxes(false);
         series->clear();
         ui->graphicsView->update();
         updateStatus();
@@ -106,3 +113,15 @@ void form::on_L_valueChanged(double L)
     ui->graphicsView->update();
     //ui->status->setText(QString::number(x1)+" "+QString::number(x2));
 }
+
+void form::setDisabledSplinBoxes(bool value){
+    ui->L->setDisabled(value);
+    ui->R->setDisabled(value);
+    ui->V->setDisabled(value);
+    ui->m->setDisabled(value);
+    ui->M1->setDisabled(value);
+    ui->M2->setDisabled(value);
+    ui->fi->setDisabled(value);
+    ui->teta->setDisabled(value);
+}
+
