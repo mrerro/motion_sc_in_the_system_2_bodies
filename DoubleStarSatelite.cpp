@@ -34,6 +34,7 @@ std::vector<double> DoubleStarSatelite::F(double time, std::vector<double> &coor
     FY[3] = G*M1*Y[1] / std::pow(std::pow(Y[0]-x1,2.)+ std::pow(Y[1],2.), 3./2.) 
           + G*M2*Y[1] / std::pow(std::pow(Y[0]-x2,2.)+ std::pow(Y[1],2.), 3./2.) 
           + w*w*Y[1] - 2*Y[2]*w;
+    return FY;
 }
 
 DoubleStarSatelite::~DoubleStarSatelite()
