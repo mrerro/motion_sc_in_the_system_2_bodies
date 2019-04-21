@@ -2,8 +2,8 @@
 
 DoubleStarSatelite::DoubleStarSatelite(double M1, double M2, double m, double L, double x0, double y0, double Vx0, double Vy0) : RungeKutta (4)
 {
-    this->M1 = M1;
-    this->M2 = M2;
+    this->M1 = M1* 1e20;
+    this->M2 = M2* 1e20;
     this->m = m;
 
     this->L = L;
@@ -28,10 +28,10 @@ std::vector<double> DoubleStarSatelite::F(double time, std::vector<double> &coor
 
     FY[0] = Y[2];
     FY[1] = Y[3];
-    FY[2] = G*M1*(Y[0]-x1) / std::pow(std::pow(Y[0]-x1,2.) + std::pow(Y[1],2.), 3./2.) 
+    FY[2] = - G*M1*(Y[0]-x1) / std::pow(std::pow(Y[0]-x1,2.) + std::pow(Y[1],2.), 3./2.)
           + G*M2*(Y[0]-x2) / std::pow(std::pow(Y[0]-x2,2.) + std::pow(Y[1],2.), 3./2.) 
           + w*w*Y[0] + 2*Y[3]*w;
-    FY[3] = G*M1*Y[1] / std::pow(std::pow(Y[0]-x1,2.)+ std::pow(Y[1],2.), 3./2.) 
+    FY[3] = - G*M1*Y[1] / std::pow(std::pow(Y[0]-x1,2.)+ std::pow(Y[1],2.), 3./2.)
           + G*M2*Y[1] / std::pow(std::pow(Y[0]-x2,2.)+ std::pow(Y[1],2.), 3./2.) 
           + w*w*Y[1] - 2*Y[2]*w;
     return FY;
