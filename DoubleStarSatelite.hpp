@@ -26,6 +26,7 @@ public:
     double get_y() { return Y[1]; }
     double get_Vx() { return Y[2]; }
     double get_Vy() { return Y[3]; }
+    double get_V(){ return sqrt(Y[2] * Y[2] + Y[3] * Y[3]); }
 };
 
 #endif

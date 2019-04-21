@@ -61,7 +61,7 @@ void form::updateGraph(){
     updateStatus();
 }
 void form::updateStatus(){
-    ui->status->setText("Время со старта : "+QString::number(totalTime)+" c dsafsdfsdfsdfsdfsdfsdf");
+    ui->status->setText("Время со старта : "+QString::number(totalTime)+" Координаты: " + QString::number(doubleStarSatelite->get_x(),'d',0) + " км, " + QString::number(doubleStarSatelite->get_y(),'d',0) + " км Скорость: " + QString::number(doubleStarSatelite->get_V(),'d',2) +" км/с");
 }
 
 form::~form()
@@ -96,9 +96,8 @@ void form::on_stop_clicked()
         ui->stop->setText("Пауза");
         setDisabledSplinBoxes(false);
         series->clear();
-        ui->graphicsView->update();
-        updateStatus();
-        //TODO очистка расчетов
+        ui->graphicsView->update();        
+        ui->status->setText("Остановлено");
     }
 }
 
