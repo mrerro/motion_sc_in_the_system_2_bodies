@@ -13,10 +13,11 @@ DoubleStarSatelite::DoubleStarSatelite(double M1, double M2, double m, double L,
     this->w = std::sqrt(G*(M1+M2)/std::pow(L, 3));
 
     std::vector<double> Y0(4);
-    Y0[0] = Vx0;
-    Y0[1] = Vy0;
-    Y0[2] = x0;
-    Y0[3] = y0;
+    Y0[0] = x0;
+    Y0[1] = y0;
+    Y0[2] = Vx0;
+    Y0[3] = Vy0;
+    SetInit (0, Y0);
 }
 
 std::vector<double> DoubleStarSatelite::F(double time, std::vector<double> &coordinates) {
