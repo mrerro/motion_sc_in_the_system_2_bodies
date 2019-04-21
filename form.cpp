@@ -45,6 +45,7 @@ form::form(QWidget *parent) :
     auto yAxis = chart->axes(Qt::Vertical);
     xAxis[0]->setRange(-250, 250);
     yAxis[0]->setRange(-250, 250);
+    chart->legend()->hide();
 
     ui->graphicsView->setChart(chart);
     ui->start->setDisabled(false);
