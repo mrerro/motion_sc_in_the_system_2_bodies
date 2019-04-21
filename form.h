@@ -1,7 +1,7 @@
 #ifndef FORM_H
 #define FORM_H
 
-#include "Satelite.h"
+#include "DoubleStarSatelite.hpp"
 
 #include <QtCharts>
 #include <QTimer>
@@ -24,15 +24,21 @@ private:
     QTimer *timer;
     QChart *chart;
     QLineSeries *series;
-    Satelite *satelite;
+    QScatterSeries *planet1;
+    QScatterSeries *planet2;
+    DoubleStarSatelite *doubleStarSatelite;
     double totalTime;
     double timerInterval;
     void updateStatus();
+    void setDisabledSplinBoxes(bool);
 
 private slots:
     void updateGraph();
     void on_start_clicked();
     void on_stop_clicked();
+    void on_L_valueChanged(double arg1);
+    void on_x_axis_editingFinished();
+    void on_y_axis_editingFinished();
 };
 
 #endif // FORM_H

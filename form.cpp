@@ -125,3 +125,14 @@ void form::setDisabledSplinBoxes(bool value){
     ui->teta->setDisabled(value);
 }
 
+void form::on_x_axis_editingFinished()
+{
+    auto xAxis = chart->axes(Qt::Horizontal);
+    xAxis[0]->setRange(-ui->x_axis->value(), ui->x_axis->value());
+}
+
+void form::on_y_axis_editingFinished()
+{
+    auto yAxis = chart->axes(Qt::Vertical);
+    yAxis[0]->setRange(-ui->y_axis->value(), ui->y_axis->value());
+}
