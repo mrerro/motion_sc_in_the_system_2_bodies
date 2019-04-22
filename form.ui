@@ -326,6 +326,9 @@
            <property name="maximum">
             <number>500</number>
            </property>
+           <property name="value">
+            <number>60</number>
+           </property>
           </widget>
           <widget class="QLabel" name="label_6">
            <property name="geometry">
@@ -354,6 +357,9 @@
            </property>
            <property name="maximum">
             <double>10000000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>40.000000000000000</double>
            </property>
           </widget>
           <widget class="QLabel" name="label_15">
@@ -432,6 +438,9 @@
            <property name="maximum">
             <number>10000000</number>
            </property>
+           <property name="value">
+            <number>15</number>
+           </property>
           </widget>
           <widget class="QDoubleSpinBox" name="teta">
            <property name="geometry">
@@ -447,6 +456,9 @@
            </property>
            <property name="maximum">
             <double>10000000.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>5.200000000000000</double>
            </property>
           </widget>
           <widget class="QLabel" name="label_8">
