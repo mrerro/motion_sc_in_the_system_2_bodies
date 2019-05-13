@@ -13,21 +13,20 @@ form::form(QWidget *parent) :
     timer->setInterval(ui->t_interval->value()); // Задаем интервал таймера
     connect(timer, SIGNAL(timeout()), this, SLOT(updateGraph())); // Подключаем сигнал таймера к нашему слоту
 
-    series = new QLineSeries();
     planet1 = new QScatterSeries();
     planet2 = new QScatterSeries();
 
     chart = new QChart();
-    chart->addSeries(series);
+
     chart->addSeries(planet1);
     chart->addSeries(planet2);
-    chart->createDefaultAxes();
-    auto xAxis = chart->axes(Qt::Horizontal);
-    auto yAxis = chart->axes(Qt::Vertical);
-    xAxis[0]->setRange(-250, 250);
-    yAxis[0]->setRange(-250, 250);
-    chart->legend()->hide();
 
+    chart->createDefaultAxes();
+    xAxis = chart->axes(Qt::Horizontal)[0];
+    yAxis = chart->axes(Qt::Vertical)[0];
+    xAxis->setRange(-250, 250);
+    yAxis->setRange(-250, 250);
+    chart->legend()->hide();
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setChart(chart);
     ui->start->setDisabled(false);
@@ -38,7 +37,7 @@ form::form(QWidget *parent) :
 void form::updateGraph() {
     totalTime = doubleStarSatelite->Step(ui->t_interval->value());
     series->append(doubleStarSatelite->get_x(), doubleStarSatelite->get_y());
-    ui->graphicsView->update();
+    //ui->graphicsView->update();
     updateStatus();
 }
 void form::updateStatus() {
@@ -57,9 +56,13 @@ void form::on_start_clicked()
 {
     if (!ui->stop->isEnabled()) {
         doubleStarSatelite = new DoubleStarSatelite(ui->M1->value(), ui->M2->value(), ui->m->value(), ui->L->value(), ui->R->value()*cos(ui->fi->value()), ui->R->value()*sin(ui->fi->value()), ui->V->value()*cos(ui->teta->value()), ui->V->value()*sin(ui->teta->value()));
+        series = new QLineSeries();
+        chart->addSeries(series);
+        series->attachAxis(xAxis);
+        series->attachAxis(yAxis);
+        timer->setInterval(ui->t_interval->value());
     }
     setDisabledSplinBoxes(true);
-    timer->setInterval(ui->t_interval->value());
     timer->start(); // Запускаем таймер
     ui->start->setDisabled(true);
     ui->stop->setText("Пауза");
@@ -78,7 +81,7 @@ void form::on_stop_clicked()
         ui->stop->setDisabled(true);
         ui->stop->setText("Пауза");
         setDisabledSplinBoxes(false);
-        series->clear();
+        //series->clear();
         ui->graphicsView->update();
         ui->status->setText("Остановлено");
     }
@@ -105,6 +108,7 @@ void form::setDisabledSplinBoxes(bool value) {
     ui->M2->setDisabled(value);
     ui->fi->setDisabled(value);
     ui->teta->setDisabled(value);
+    ui->t_interval->setDisabled(value);
 }
 
 void form::on_x_axis_editingFinished()

@@ -23,6 +23,8 @@ private:
     Ui::form *ui;
     QTimer *timer;
     QChart *chart;
+    QtCharts::QAbstractAxis * xAxis;
+    QtCharts::QAbstractAxis * yAxis;
     QLineSeries *series;
     QScatterSeries *planet1;
     QScatterSeries *planet2;
