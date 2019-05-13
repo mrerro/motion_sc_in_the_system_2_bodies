@@ -8,10 +8,9 @@ form::form(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::form)
 {
-	ui->setupUi(this);
-	timerInterval = 10;
+    ui->setupUi(this);
 	timer = new QTimer(this); // Создаем объект класса QTimer и передаем адрес переменной
-	timer->setInterval(timerInterval); // Задаем интервал таймера
+    timer->setInterval(ui->t_interval->value()); // Задаем интервал таймера
 	connect(timer, SIGNAL(timeout()), this, SLOT(updateGraph())); // Подключаем сигнал таймера к нашему слоту
 
 	series = new QLineSeries();
@@ -29,6 +28,7 @@ form::form(QWidget *parent) :
 	yAxis[0]->setRange(-250, 250);
 	chart->legend()->hide();
 
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 	ui->graphicsView->setChart(chart);
 	ui->start->setDisabled(false);
 	ui->stop->setDisabled(true);
@@ -36,7 +36,7 @@ form::form(QWidget *parent) :
 }
 
 void form::updateGraph() {
-	totalTime = doubleStarSatelite->Step(timerInterval);
+    totalTime = doubleStarSatelite->Step(ui->t_interval->value());
 	series->append(doubleStarSatelite->get_x(), doubleStarSatelite->get_y());
 	ui->graphicsView->update();
 	updateStatus();
@@ -59,6 +59,7 @@ void form::on_start_clicked()
 		doubleStarSatelite = new DoubleStarSatelite(ui->M1->value(), ui->M2->value(), ui->m->value(), ui->L->value(), ui->R->value()*cos(ui->fi->value()), ui->R->value()*sin(ui->fi->value()), ui->V->value()*cos(ui->teta->value()), ui->V->value()*sin(ui->teta->value()));
 	}
 	setDisabledSplinBoxes(true);
+    timer->setInterval(ui->t_interval->value());
 	timer->start(); // Запускаем таймер
 	ui->start->setDisabled(true);
 	ui->stop->setText("Пауза");

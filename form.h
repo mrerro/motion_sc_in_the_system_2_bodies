@@ -27,8 +27,7 @@ private:
 	QScatterSeries *planet1;
 	QScatterSeries *planet2;
 	DoubleStarSatelite *doubleStarSatelite;
-	double totalTime;
-	double timerInterval;
+    double totalTime;
 	void updateStatus();
 	void setDisabledSplinBoxes(bool);
 
